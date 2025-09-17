@@ -13,15 +13,53 @@
 ---
 
 ## 🚀 Overview
-A modern, agentic AI-powered platform for investment research and financial analysis. This project demonstrates autonomous planning, dynamic tool use, self-reflection, and learning across runs using real-world financial data and news. Built for the AAI-520 Final Team Project, it showcases multi-agent workflows such as prompt chaining, routing, and evaluator–optimizer patterns, integrating APIs and LLMs to deliver actionable insights for investors.
+FData is a modern, agentic AI-powered platform for investment research and financial analysis. It simulates the operational architecture of modern AI-enabled hedge funds and investment platforms, using multiple specialized agents to analyze market and company performance, news, and filings, and to generate actionable investment insights.
+
+---
+
+## 🧩 Agent Architecture
+- **Investment Research Agent:** Plans research workflow for a given stock symbol.
+- **Market Data Agent:** Retrieves and analyzes time-series data (yfinance).
+- **News Agent:** Retrieves, cleans, classifies, and summarizes financial news (NewsAPI, sentiment analysis, NER).
+- **Earnings Agent:** Extracts and summarizes insights from financial filings and earnings reports (SEC EDGAR).
+- **Evaluator Agent:** Critiques outputs, assesses coherence, and suggests improvements (LLM-based feedback loop).
+- **Memory Agent:** Maintains lightweight memory of prior analyses for incremental learning.
+
+---
+
+## 🔄 Workflow Patterns
+- **Prompt Chaining:** Ingest News → Clean Text → Classify Sentiment → Extract Entities → Summarize Content
+- **Task Routing:** Dynamically route content to the appropriate agent (market/news/earnings)
+- **Evaluator–Optimizer:** Evaluator agent critiques and origin agent refines output
+
+---
+
+## 🛠️ Technical Stack
+**Programming Language:** Python 3.10+
+
+**APIs & Data Sources:**
+- Yahoo Finance (`yfinance`)
+- NewsAPI.org (or Kaggle financial news datasets)
+- FRED (Federal Reserve Economic Data)
+- SEC EDGAR (Earnings Reports)
+
+**Libraries/Frameworks:**
+- pandas, matplotlib, scikit-learn
+- openai, langchain, transformers
+- nltk, spaCy
+- streamlit (web UI)
+
+**Version Control:** GitHub
+**Documentation:** PEP8-compliant code, inline comments, comprehensive README
 
 ---
 
 ## ✨ Features
-- 🤖 Autonomous Investment Research Agent
-- 🔗 Prompt Chaining, Routing, and Evaluator–Optimizer workflows
-- 📈 Integrates Yahoo Finance, NewsAPI, and more
-- 🧠 Self-improving and self-reflective agent design
+- 🤖 Modular, specialized agents for each analytical function
+- 🔗 Chained prompts and agent workflows
+- 📈 Real-time and historical data analysis
+- 📰 News sentiment and entity extraction
+- 🧠 Self-improving, memory-enabled agent design
 - 📊 Modern Streamlit dashboard UI
 
 ---
@@ -36,16 +74,21 @@ A modern, agentic AI-powered platform for investment research and financial anal
    ```bash
    pip install -r requirements.txt
    ```
-3. **Set your API keys** (for NewsAPI and OpenAI)
+3. **Download NLTK and spaCy models**
+   ```python
+   python -m nltk.downloader punkt vader_lexicon
+   python -m spacy download en_core_web_sm
+   ```
+4. **Set your API keys** (for NewsAPI and OpenAI)
    ```bash
    export NEWSAPI_KEY=your_newsapi_key
    export OPENAI_API_KEY=your_openai_key
    ```
-4. **Run the Streamlit app**
+5. **Run the Streamlit app**
    ```bash
    streamlit run streamlit_app.py
    ```
-5. **Or launch the Jupyter Notebook**
+6. **Or launch the Jupyter Notebook**
    ```bash
    jupyter notebook Investment_Research_Agent.ipynb
    ```
@@ -61,7 +104,9 @@ A modern, agentic AI-powered platform for investment research and financial anal
 ---
 
 ## 👥 Authors
-- [Your Team Names Here]
+- Marwah Faraj
+- Atul Prasad
+- Patrick Woo-Sam
 
 ---
 
@@ -69,6 +114,10 @@ A modern, agentic AI-powered platform for investment research and financial anal
 - Yahoo Finance, NewsAPI, Alpha Vantage, FRED, SEC EDGAR
 - [PEP8 Style Guide](https://peps.python.org/pep-0008/)
 - [Streamlit Documentation](https://docs.streamlit.io/)
+- [NLTK Documentation](https://www.nltk.org/)
+- [spaCy Documentation](https://spacy.io/)
+- [LangChain](https://python.langchain.com/)
+- [Transformers](https://huggingface.co/docs/transformers/index)
 
 ---
 

@@ -1,0 +1,15 @@
+yfinance
+requests
+pandas
+numpy
+scikit-learn
+jupyter
+openai
+streamlit
+plotly
+matplotlib
+scikit-learn
+langchain
+transformers
+nltk
+spacy
