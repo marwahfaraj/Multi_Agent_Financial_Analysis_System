@@ -72,6 +72,8 @@ FData is a modern, agentic AI-powered platform for investment research and finan
    ```
 2. **Install dependencies**
    ```bash
+   conda create -n aai520-mafas python=3.13 -y
+   conda activate aai520-mafas
    pip install -r requirements.txt
    ```
 3. **Download NLTK and spaCy models**
@@ -83,6 +85,7 @@ FData is a modern, agentic AI-powered platform for investment research and finan
    ```bash
    export NEWSAPI_KEY=your_newsapi_key
    export OPENAI_API_KEY=your_openai_key
+   export GOOGLE_API_KEY=your_google_aistudio_key
    ```
 5. **Run the Streamlit app**
    ```bash
