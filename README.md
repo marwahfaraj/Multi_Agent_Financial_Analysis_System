@@ -1,7 +1,7 @@
 # Multi-Agent Financial Analysis System
 
 <p align="center">
-  <img src="image/multi_agent_system.png" alt="Multi-Agent System Diagram" width="500"/>
+  <img src="image/multi_agent_sys.png" alt="Multi-Agent System Diagram" width="500"/>
 </p>
 
 ---
