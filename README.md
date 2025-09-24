@@ -180,7 +180,7 @@ python agents/memory_agent.py
 
 ## 📄 License
 
-This project is developed for educational purposes as part of the AAI-520 course at the University of San Diego.
+This project is licensed under the MIT License.
 
 
 ---
