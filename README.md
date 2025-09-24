@@ -1,5 +1,10 @@
 # Multi-Agent Financial Analysis System
 
+<p align="center">
+  <img src="image/multi_agent_sys.png" alt="Multi-Agent System Diagram" width="500"/>
+</p>
+
+---
 A comprehensive financial analysis system powered by agentic AI using the Agno platform, developed for the AAI-520 Final Team Project.
 
 ## 🎯 Project Overview
@@ -14,21 +19,18 @@ This project implements a multi-agent financial analysis system that demonstrate
 
 ## 📋 Project Requirements
 
-### Agent Functions (33.8%)
+### Agent Functions
 - ✅ **Planning**: Agents plan research steps for given stock symbols
 - ✅ **Dynamic Tool Usage**: Agents use APIs, datasets, and retrieval tools dynamically
 - ✅ **Self-Reflection**: Agents assess the quality of their output
 - ✅ **Learning**: Agents maintain memory and improve across runs
 
-### Workflow Patterns (33.8%)
+### Workflow Patterns
 - ✅ **Prompt Chaining**: Ingest News → Preprocess → Classify → Extract → Summarize
 - ✅ **Routing**: Direct content to appropriate specialists (earnings, news, market analyzers)
 - ✅ **Evaluator–Optimizer**: Generate analysis → evaluate quality → refine using feedback
 
-### Code (32.4%)
-- ✅ **GitHub Repository**: Version control and collaboration
-- ✅ **PEP 8 Compliance**: Python code style guidelines
-- ✅ **Comprehensive Documentation**: README, comments, and documentation
+documentation
 
 ## 🏗️ Project Structure
 
