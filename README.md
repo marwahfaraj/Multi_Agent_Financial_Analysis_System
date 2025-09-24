@@ -5,17 +5,12 @@
 </p>
 
 ---
-A comprehensive financial analysis system powered by agentic AI using the Agno platform, developed for the AAI-520 Final Team Project.
+A comprehensive financial analysis system powered by agentic AI using the Agno platform.
 
 ## 🎯 Project Overview
 
 This project implements a multi-agent financial analysis system that demonstrates autonomous agent functions and workflow patterns required for modern financial analysis. The system uses specialized AI agents to analyze market data, news sentiment, earnings reports, and provide investment recommendations.
 
-## 👥 Team Members
-
-- **Marwah Faraj**: Investment Research Agent, Earnings Agent, Workflow Patterns Implementation
-- **Patrick Woo-Sam**: News Agent, Memory Agent
-- **Atul Prasad**: Market Data Agent, API Tools Integration
 
 ## 📋 Project Requirements
 
@@ -37,21 +32,21 @@ documentation
 ```
 Multi_Agent_Financial_Analysis_System/
 ├── agents/                              # AI Agent implementations
-│   ├── investment_research_agent.py    # Main orchestrator (Marwah)
-│   ├── earnings_agent.py              # Financial filings analysis (Marwah)
-│   ├── news_agent.py                  # News analysis and sentiment (Patrick)
-│   ├── memory_agent.py                # Context retention (Patrick)
-│   ├── market_data_agent.py           # Market data fetching (Atul)
-│   └── evaluator_agent.py             # Quality assessment (Team)
+│   ├── investment_research_agent.py    # Main orchestrator
+│   ├── earnings_agent.py              # Financial filings analysis
+│   ├── news_agent.py                  # News analysis and sentiment
+│   ├── memory_agent.py                # Context retention
+│   ├── market_data_agent.py           # Market data fetching
+│   └── evaluator_agent.py             # Quality assessment
 ├── tools/                              # API integration tools
-│   ├── yahoo_finance_tools.py         # Yahoo Finance API (Atul)
-│   ├── news_api_tools.py             # NewsAPI integration (Atul)
-│   ├── sec_edgar_tools.py            # SEC EDGAR API (Atul)
-│   └── fred_tools.py                  # FRED economic data (Atul)
+│   ├── yahoo_finance_tools.py         # Yahoo Finance API
+│   ├── news_api_tools.py             # NewsAPI integration
+│   ├── sec_edgar_tools.py            # SEC EDGAR API
+│   └── fred_tools.py                  # FRED economic data
 ├── workflows/                          # Workflow pattern implementations
-│   ├── prompt_chaining.py            # News processing pipeline (Marwah)
-│   ├── routing.py                    # Content routing (Marwah)
-│   └── evaluator_optimizer.py        # Quality refinement (Marwah)
+│   ├── prompt_chaining.py            # News processing pipeline
+│   ├── routing.py                    # Content routing
+│   └── evaluator_optimizer.py        # Quality refinement
 ├── utils/                              # Utility functions
 ├── Investment_Research_Agent.ipynb     # Main deliverable notebook
 ├── requirements.txt                    # Python dependencies
@@ -183,44 +178,11 @@ python agents/news_agent.py
 python agents/memory_agent.py
 ```
 
-## 📝 Development Status
-
-### Completed ✅
-- [x] Project structure setup
-- [x] Agent framework implementation
-- [x] Basic agent functionality
-- [x] Workflow pattern placeholders
-- [x] Documentation structure
-
-### In Progress 🔄
-- [ ] API tools integration (Atul)
-- [ ] Workflow pattern implementation (Marwah)
-- [ ] Agent integration and testing (Team)
-- [ ] End-to-end system testing (Team)
-
-### TODO 📋
-- [ ] Market Data Agent implementation (Atul)
-- [ ] Evaluator Agent implementation (Team)
-- [ ] Workflow pattern completion (Marwah)
-- [ ] Main notebook completion (Team)
-- [ ] Final testing and documentation (Team)
-
-## 🤝 Contributing
-
-This is a team project for AAI-520. Each team member has specific responsibilities:
-
-- **Marwah**: Investment Research Agent, Earnings Agent, Workflow Patterns
-- **Patrick**: News Agent, Memory Agent
-- **Atul**: Market Data Agent, API Tools
-
 ## 📄 License
 
 This project is developed for educational purposes as part of the AAI-520 course at the University of San Diego.
 
-## 📞 Contact
-
-For questions about this project, please contact the team members or refer to the course instructor.
 
 ---
 
-**AAI-520 Final Team Project - Multi-Agent Financial Analysis System**
+**Multi-Agent Financial Analysis System**
