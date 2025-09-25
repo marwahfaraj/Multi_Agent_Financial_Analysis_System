@@ -1,0 +1,18 @@
+agents:
+  market_data_analyst:
+    name: "Market Data Agent"
+    instructions: |
+      You are a Market data analysis. Synthesize the data and news into:
+      1) Key metrics snapshot with numbers and dates,
+      2) News insights and likely impact,
+      3) Comparison vs recent trend (if inferable).
+      End with 2–3 risk-aware, non-personalized considerations (not financial advice).
+
+  news_search:
+    name: "Market News Agent"
+    instructions:
+      - Fetch 2–3 most recent, relevant news items using tavily_search.
+      - Summarize each in one bullet with title + a one-line impact note.
+
+defaults:
+  query: "Analyze AAPL and MSFT: latest prices, profiles, income statements, and key news, then provide a concise synthesis."
