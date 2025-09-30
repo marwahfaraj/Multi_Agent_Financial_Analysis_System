@@ -44,8 +44,8 @@ Multi_Agent_Financial_Analysis_System/
 │   ├── routing.py                    # Content routing
 │   └── evaluator_optimizer.py        # Quality refinement
 ├── utils/                              # Utility functions
-├── Investment_Research_Agent.ipynb     # Main deliverable notebook
 ├── requirements.txt                    # Python dependencies
+├── snippet/                            # API testing and examples
 └── README.md                          # Project documentation
 ```
 
@@ -61,7 +61,7 @@ Multi_Agent_Financial_Analysis_System/
 1. Clone the repository
 2. Install dependencies: `pip install -r requirements.txt`
 3. Set up environment variables in `.env` file
-4. Run the main notebook: `jupyter notebook Investment_Research_Agent.ipynb`
+4. Run individual agents or workflows as needed
 
 ### Environment Setup
 Create a `.env` file with the following variables:
