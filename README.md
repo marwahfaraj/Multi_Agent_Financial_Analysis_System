@@ -36,13 +36,9 @@ Multi_Agent_Financial_Analysis_System/
 │   ├── earnings_agent.py              # Financial filings analysis
 │   ├── news_agent.py                  # News analysis and sentiment
 │   ├── memory_agent.py                # Context retention
-│   ├── market_data_agent.py           # Market data fetching
-│   └── evaluator_agent.py             # Quality assessment
-├── tools/                              # API integration tools
-│   ├── yahoo_finance_tools.py         # Yahoo Finance API
-│   ├── news_api_tools.py             # NewsAPI integration
-│   ├── sec_edgar_tools.py            # SEC EDGAR API
-│   └── fred_tools.py                  # FRED economic data
+│   ├── market_data_agent.py           # Market data fetching (with integrated tools)
+│   ├── evaluator_agent.py             # Quality assessment
+│   └── params.yaml                    # Agent configuration parameters
 ├── workflows/                          # Workflow pattern implementations
 │   ├── prompt_chaining.py            # News processing pipeline
 │   ├── routing.py                    # Content routing
@@ -77,9 +73,9 @@ FRED_API_KEY=your_fred_key_here
 
 ## 🔧 Technology Stack
 
-- **Agno Platform**: Multi-agent framework
+- **Agno Platform**: Multi-agent framework with integrated tools
 - **Google Gemini**: Large language model
-- **Yahoo Finance**: Market data
+- **Yahoo Finance (yfinance)**: Market data via agent-embedded tools
 - **NewsAPI**: Financial news
 - **SEC EDGAR**: Company filings
 - **FRED**: Economic data
