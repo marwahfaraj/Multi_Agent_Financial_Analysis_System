@@ -19,3 +19,4 @@ spacy==3.8.7
 streamlit==1.49.1
 transformers==4.56.2
 yfinance==0.2.66
+PyYAML>=6.0.0
