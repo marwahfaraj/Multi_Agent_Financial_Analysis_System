@@ -1,4 +1,4 @@
-# TODO: Atul - Evaluator-Optimizer Workflow
+# Evaluator-Optimizer Workflow
 # Implement the Evaluator-Optimizer workflow pattern: Generate analysis → evaluate quality → refine using feedback
 # This is one of the three required workflow patterns
 
@@ -13,7 +13,7 @@ def evaluator_optimizer_workflow(analysis_input):
     Returns:
         Refined analysis after evaluation and optimization
     """
-    # TODO: Marwah - Implement this workflow
+    # Implementation steps:
     # Step 1: Generate initial analysis
     # Step 2: Evaluate quality (completeness, accuracy, clarity)
     # Step 3: Refine based on feedback
@@ -32,5 +32,5 @@ def iterative_refinement(analysis, max_iterations=3):
     Returns:
         Final refined analysis
     """
-    # TODO: Atul - Implement iterative refinement
+    # Implementation pending
     pass

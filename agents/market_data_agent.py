@@ -1,6 +1,6 @@
-# TODO: Atul - Market Data Agent
-# This agent will be responsible for fetching market data using APIs
-# Should integrate with tools/yahoo_finance_tools.py and other data sources
+# Market Data Agent
+# This agent is responsible for fetching market data using APIs
+# Integrates with yfinance for stock quotes and OHLCV data
 import json
 import pandas as pd
 import yfinance as yf
