@@ -135,56 +135,10 @@ Final Answer: I've retrieved the memories about Microsoft. The latest news inclu
 """,
     ),
     add_datetime_to_context=True,
-    # debug_mode=True,
     markdown=True,
 )
 
 if __name__ == "__main__":
-    # memory_agent.print_response(
-    #     """
-    # • Title: MSFT Stock Looks Set to Rejoin the $4 Trillion Club as Microsoft Gets More Ambitious With AI
-    #     • Source: Barchart
-    #     • URL:
-    #       https://www.msn.com/en-us/money/other/msft-stock-looks-set-to-rejoin-the-4-trillion-club-as-microsoft-gets-more-ambitious-with-ai/ar-AA1
-    #       MUOE5
-    #     • Date: 2025-09-19
-    #     • Sentiment: Positive
-    #     • Summary: Microsoft's stock is poised to re-enter the $4 trillion market capitalization driven by its aggressive AI strategy, despite a
-    #       recent temporary dip below this threshold.
-    #   • Title: Microsoft Stock (MSFT) Seen Delivering Strong Total Returns, Analyst Notes
-    #     • Source: Insider Monkey
-    #     • URL: https://www.msn.com/en-us/money/topstocks/microsoft-stock-msft-seen-delivering-strong-total-returns-analyst-notes/ar-AA1MQnlB
-    #     • Date: 2025-09-18
-    #     • Sentiment: Positive
-    #     • Summary: Analysts predict strong total returns for Microsoft stock, with Morgan Stanley reiterating an "Overweight" rating and calling
-    #       shares "attractive," highlighting its position as a leading AI stock.
-    #   • Title: Why Microsoft (MSFT) Stock Is Down Today
-    #     • Source: StockStory.org
-    #     • URL: https://www.msn.com/en-us/money/markets/why-microsoft-msft-stock-is-down-today/ar-AA1LY7zV
-    #     • Date: 2025-09-05
-    #     • Sentiment: Negative
-    #     • Summary: Microsoft's stock declined 2.6% today following news of CEO Satya Nadella's significant stock sale, further impacted by a wider
-    #       sell-off in the technology sector.
-    #   • Title: Microsoft (NASDAQ: MSFT) Stock Price Prediction for 2025: Where Will It Be in 1 Year
-    #     • Source: 24/7 Wall St.
-    #     • URL: https://247wallst.com/investing/2025/09/18/microsoft-nasdaq-msft-stock-price-prediction-for-2025-where-will-it-be-in-1-year/
-    #     • Date: 2025-05-23
-    #     • Sentiment: Positive
-    #     • Summary: Microsoft continues to show strong performance with earnings beats and robust growth across its cloud, AI, and gaming
-    #       divisions, leading to positive predictions for its 2025 stock price.
-    #   • Title: EC Approves Microsoft Corporation (MSFT)'s Commitments Over Teams Integration Concerns
-    #     • Source: Insider Monkey
-    #     • URL:
-    #       https://www.msn.com/en-us/money/savingandinvesting/ec-approves-microsoft-corporation-msft-s-commitments-over-teams-integration-concerns/
-    #       ar-AA1MPxO8
-    #     • Date: 2025-09-18
-    #     • Sentiment: Positive
-    #     • Summary: The European Commission has approved Microsoft's commitments regarding Teams integration, resolving concerns and marking a
-    #       positive regulatory outcome for the company.
-    # """,
-    #     user_id="financial_user",
-    #     session_id="financial_memory_session",
-    # )
     while True:
         user_input = input("User: ")
         if user_input.lower() in ["exit", "quit"]:

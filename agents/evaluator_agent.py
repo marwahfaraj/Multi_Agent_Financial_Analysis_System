@@ -1,25 +1,27 @@
-# TODO: Team - Evaluator Agent
-# This agent will be responsible for evaluating the quality of analysis outputs
+# Evaluator Agent
+# This agent is responsible for evaluating the quality of analysis outputs
 # Part of the Evaluator-Optimizer workflow pattern requirement
 
+from __future__ import annotations
+
 import json
+from typing import Dict, Any, Optional, Tuple
+
 from agno.agent import Agent
 from agno.db.sqlite import SqliteDb
 from agno.models.google import Gemini
 from dotenv import load_dotenv
-from __future__ import annotations
-from typing import Dict, Any, Optional, Tuple
 
 
 load_dotenv(".env")
 
 
-# TODO: Team - Implement this agent
-# This agent should:
-# 1. Evaluate analysis quality (completeness, accuracy, clarity)
-# 2. Provide constructive feedback for improvement
-# 3. Work with Investment Research Agent for iterative refinement
-# 4. Implement the Evaluator-Optimizer workflow pattern
+# Evaluator Agent Implementation
+# This agent:
+# 1. Evaluates analysis quality (completeness, accuracy, clarity)
+# 2. Provides constructive feedback for improvement
+# 3. Works with Investment Research Agent for iterative refinement
+# 4. Implements the Evaluator-Optimizer workflow pattern
 
 evaluator_agent = Agent(
     name="Evaluator Agent",
@@ -157,7 +159,7 @@ def evaluator_optimizer_cycle(
 if __name__ == "__main__":
     print("Evaluator Agent (type 'exit' to quit)")
     count = 0
-    while count <1:
+    while count < 1:
         user_input = input("Paste draft to evaluate (or 'exit'): ").strip()
         if user_input.lower() in {"exit", "quit"}:
             break
@@ -169,4 +171,4 @@ if __name__ == "__main__":
             plan = build_revision_plan(user_input, result)
             print(json.dumps(plan, indent=2))
             print("\nCall optimize_with_investment_agent(draft, plan) to produce a revised draft.")
-        count = count +1
+        count = count + 1

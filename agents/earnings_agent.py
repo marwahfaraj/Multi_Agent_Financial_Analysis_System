@@ -28,12 +28,6 @@ earnings_agent = Agent(
 )
 
 if __name__ == "__main__":
-    # earnings_agent.print_response("MSFT")
-    # while True:
-    #     user_input = input("User: ")
-    #     if user_input.lower() in ["exit", "quit"]:
-    #         break
-    #     earnings_agent.print_response(user_input)
     while True:
         user_input = input("User: ")
         if user_input.lower() in ["exit", "quit"]:

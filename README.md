@@ -36,20 +36,16 @@ Multi_Agent_Financial_Analysis_System/
 │   ├── earnings_agent.py              # Financial filings analysis
 │   ├── news_agent.py                  # News analysis and sentiment
 │   ├── memory_agent.py                # Context retention
-│   ├── market_data_agent.py           # Market data fetching
-│   └── evaluator_agent.py             # Quality assessment
-├── tools/                              # API integration tools
-│   ├── yahoo_finance_tools.py         # Yahoo Finance API
-│   ├── news_api_tools.py             # NewsAPI integration
-│   ├── sec_edgar_tools.py            # SEC EDGAR API
-│   └── fred_tools.py                  # FRED economic data
+│   ├── market_data_agent.py           # Market data fetching (with integrated tools)
+│   ├── evaluator_agent.py             # Quality assessment
+│   └── params.yaml                    # Agent configuration parameters
 ├── workflows/                          # Workflow pattern implementations
 │   ├── prompt_chaining.py            # News processing pipeline
 │   ├── routing.py                    # Content routing
 │   └── evaluator_optimizer.py        # Quality refinement
 ├── utils/                              # Utility functions
-├── Investment_Research_Agent.ipynb     # Main deliverable notebook
 ├── requirements.txt                    # Python dependencies
+├── snippet/                            # API testing and examples
 └── README.md                          # Project documentation
 ```
 
@@ -65,7 +61,7 @@ Multi_Agent_Financial_Analysis_System/
 1. Clone the repository
 2. Install dependencies: `pip install -r requirements.txt`
 3. Set up environment variables in `.env` file
-4. Run the main notebook: `jupyter notebook Investment_Research_Agent.ipynb`
+4. Run individual agents or workflows as needed
 
 ### Environment Setup
 Create a `.env` file with the following variables:
@@ -77,9 +73,9 @@ FRED_API_KEY=your_fred_key_here
 
 ## 🔧 Technology Stack
 
-- **Agno Platform**: Multi-agent framework
+- **Agno Platform**: Multi-agent framework with integrated tools
 - **Google Gemini**: Large language model
-- **Yahoo Finance**: Market data
+- **Yahoo Finance (yfinance)**: Market data via agent-embedded tools
 - **NewsAPI**: Financial news
 - **SEC EDGAR**: Company filings
 - **FRED**: Economic data

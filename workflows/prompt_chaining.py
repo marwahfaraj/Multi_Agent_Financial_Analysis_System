@@ -1,4 +1,4 @@
-# TODO: Marwah - Prompt Chaining Workflow
+# Prompt Chaining Workflow
 # Implement the Prompt Chaining workflow pattern: Ingest News → Preprocess → Classify → Extract → Summarize
 # This is one of the three required workflow patterns
 
@@ -13,7 +13,7 @@ def news_processing_pipeline(news_data):
     Returns:
         Processed and summarized news analysis
     """
-    # TODO: Marwah - Implement this workflow
+    # Implementation steps:
     # Step 1: Ingest News
     # Step 2: Preprocess (clean, normalize)
     # Step 3: Classify (sentiment, category)
@@ -33,5 +33,5 @@ def financial_data_pipeline(market_data):
     Returns:
         Processed financial analysis
     """
-    # TODO: Marwah - Implement this workflow
+    # Implementation pending
     pass

@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# TODO: Add tools for using NEWSAPI function to get news articles in addition to DuckDuckGo
+# Note: Currently uses DuckDuckGo for news search. Could be enhanced with NewsAPI integration.
 
 news_agent = Agent(
     name="News Agent",
@@ -32,7 +32,6 @@ news_agent = Agent(
     db=SqliteDb(db_file="news_agent.db"),
     tools=[DuckDuckGoTools(fixed_max_results=15), PandasTools()],
     tool_call_limit=20,
-    # debug_mode=True,
     add_history_to_context=True,
     add_datetime_to_context=True,
     markdown=True,

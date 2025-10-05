@@ -26,12 +26,6 @@ investment_research_agent = Agent(
 )
 
 if __name__ == "__main__":
-    # investment_research_agent.print_response("MSFT")
-    # while True:
-    #     user_input = input("User: ")
-    #     if user_input.lower() in ["exit", "quit"]:
-    #         break
-    #     investment_research_agent.print_response(user_input)
     while True:
         user_input = input("User: ")
         if user_input.lower() in ["exit", "quit"]:
