@@ -1,37 +1,128 @@
 # Prompt Chaining Workflow
-# Implement the Prompt Chaining workflow pattern: Ingest News → Preprocess → Classify → Extract → Summarize
-# This is one of the three required workflow patterns
+from agno.workflow import Step, Workflow, StepInput, StepOutput, Parallel
+from agents.memory_agent import memory_agent
+from agents.evaluator_agent import evaluator_agent
+from agents.preprocessing_agent import preprocessing_agent
+from agents.investment_research_agent import investment_research_agent
+from workflows.routing import multi_agent_routing
+from json import loads
 
-def news_processing_pipeline(news_data):
-    """
-    Implement Prompt Chaining workflow pattern:
-    Ingest News → Preprocess → Classify → Extract → Summarize
-    
-    Args:
-        news_data: Raw news data
-        
-    Returns:
-        Processed and summarized news analysis
-    """
-    # Implementation steps:
-    # Step 1: Ingest News
-    # Step 2: Preprocess (clean, normalize)
-    # Step 3: Classify (sentiment, category)
-    # Step 4: Extract (entities, key information)
-    # Step 5: Summarize (create concise summary)
-    
-    pass
 
-def financial_data_pipeline(market_data):
+def parse_preprocessing_output(step_input: StepInput) -> dict:
     """
-    Implement Prompt Chaining for financial data:
-    Ingest Data → Preprocess → Analyze → Extract → Summarize
-    
+    Parses the JSON output from the preprocessing agent.
+
     Args:
-        market_data: Raw market data
-        
+        output (str): The JSON string output from the preprocessing agent.
+
     Returns:
-        Processed financial analysis
+        dict: Parsed dictionary containing ticker, action_item, and data_types.
     """
-    # Implementation pending
-    pass
+    try:
+        output = step_input.get_step_content("Preprocess Input")
+        # Clean the output to ensure it's valid JSON
+        cleaned_output = "\n".join(
+            line for line in output.splitlines() if not line.strip().startswith("```")
+        )
+        return loads(cleaned_output)
+    except Exception as e:
+        print(f"Error parsing preprocessing output: {e}")
+        return {}
+
+
+def multi_agent_router_executor(step_input: StepInput) -> StepOutput:
+    """
+    Executor function to route tasks to multiple agents based on input parameters.
+
+    Args:
+        step_input (StepInput): Input containing content and agent types.
+
+    Returns:
+        StepOutput: Output from the routed agents.
+    """
+    data = parse_preprocessing_output(step_input)
+    ticker = data.get("ticker")
+    action_item = data.get("action_item")
+    agent_types = data.get("data_types", [])
+
+    # Call the multi-agent routing function with the provided content and agent types
+    result = multi_agent_routing(f"Stock Ticker: {ticker}\n{action_item}", agent_types)
+    output = ""
+    for agent, response in result["responses"].items():
+        output += f"{agent}: {response}\n\n"
+
+    return StepOutput(content=output)
+
+
+def stored_data_retriever_executor(step_input: StepInput) -> StepOutput:
+    """
+    Executor function to retrieve stored data from memory based on input parameters.
+
+    Args:
+        step_input (StepInput): Input containing content and agent types.
+
+    Returns:
+        StepOutput: Output from the memory agent.
+    """
+    data = parse_preprocessing_output(step_input)
+    ticker = data.get("ticker")
+    action_item = data.get("action_item")
+
+    memory_prompt = "\n".join(
+        [
+            f"Retrieve any stored information related to {ticker} that might assist with the following request: {action_item}.",
+            "This is what we already know, do not repeat it: ",
+            step_input.previous_step_content,
+            "If no relevant information is found, respond with 'No relevant information found.'",
+        ]
+    )
+    memory_response = memory_agent.run(memory_prompt).content
+
+    if "No relevant information found." not in memory_response:
+        return StepOutput(
+            content="\n".join(
+                [
+                    step_input.previous_step_content,
+                    f"\n\nMemory Agent: {memory_response}",
+                ]
+            )
+        )
+
+    return StepOutput(content=step_input.previous_step_content)
+
+
+workflow = Workflow(
+    name="Analysis workflow",
+    steps=[
+        # Parse the user input to extract ticker, action item, and data types
+        Step(name="Preprocess Input", agent=preprocessing_agent),
+        # Gather data using the multi-agent router
+        Step(
+            name="Gather Data",
+            executor=multi_agent_router_executor,
+        ),
+        # Retrieve any additional stored data from memory
+        Step(
+            name="Retrieve Stored Data",
+            executor=stored_data_retriever_executor,
+        ),
+        # Synthesize the analysis and store relevant information in memory
+        Parallel(
+            Step(
+                name="Synthesize Analysis",
+                agent=investment_research_agent,
+            ),
+            Step(
+                name="Store Data in Memory",
+                agent=memory_agent,
+            ),
+        ),
+    ],
+)
+
+if __name__ == "__main__":
+    while True:
+        user_input = input("What analysis do you need? (type 'exit' to quit) ")
+        if user_input.lower() == "exit":
+            break
+        workflow.print_response(user_input, markdown=True)
