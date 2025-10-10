@@ -1,13 +1,9 @@
 from agno.agent import Agent
 from agno.db.sqlite import SqliteDb
-from agno.models.google import Gemini
-from dotenv import load_dotenv
-
-load_dotenv()
+from agents.config import DEFAULT_AGENT_KWARGS
 
 earnings_agent = Agent(
     name="Earnings Agent",
-    model=Gemini(id="gemini-2.5-flash"),
     instructions=[
         "You are an earnings analysis agent for financial analysis.",
         "The user will provide a company name or stock symbol. Retrieve and summarize key insights from financial filings and earnings reports (such as SEC EDGAR) for the provided company or symbol.",
@@ -22,9 +18,9 @@ earnings_agent = Agent(
         "Present your findings in a structured format with clear insights and implications for investment decisions.",
         "Highlight both positive and negative trends with supporting data from the filings.",
     ],
-    db=SqliteDb(db_file="earnings_agent.db"),
     add_datetime_to_context=True,
     markdown=True,
+    **DEFAULT_AGENT_KWARGS
 )
 
 if __name__ == "__main__":

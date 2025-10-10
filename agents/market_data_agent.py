@@ -8,9 +8,9 @@ import yfinance as yf
 from dotenv import load_dotenv
 
 from agno.agent import Agent
-from agno.models.google import Gemini
 from agno.db.sqlite import SqliteDb
 from agno.tools import tool
+from agents.config import DEFAULT_AGENT_KWARGS
 
 load_dotenv(".env")
 
@@ -64,7 +64,6 @@ TOOLS = [fetch_quote, fetch_ohlcv]
 
 market_data_agent = Agent(
     name="Market Data Agent",
-    model=Gemini(id="gemini-2.5-flash"),
     instructions=[
         "You are a financial market data agent.",
         "When the user provides a stock symbol or company name, call fetch_quote or fetch_ohlcv "
@@ -72,9 +71,9 @@ market_data_agent = Agent(
         "Be clear about symbol, time range, and assumptions.",
     ],
     tools=TOOLS,
-    db=SqliteDb(db_file="market_data_agent.db"),
     add_datetime_to_context=True,
     markdown=True,
+    **DEFAULT_AGENT_KWARGS
 )
 
 
