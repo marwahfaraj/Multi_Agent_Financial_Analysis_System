@@ -1,17 +1,12 @@
 from agno.agent import Agent
 from agno.db.sqlite import SqliteDb
-from agno.models.google import Gemini
-from agno.tools.pandas import PandasTools
 from agno.tools.duckduckgo import DuckDuckGoTools
-from dotenv import load_dotenv
-
-load_dotenv()
+from agents.config import DEFAULT_AGENT_KWARGS
 
 # Note: Currently uses DuckDuckGo for news search. Could be enhanced with NewsAPI integration.
 
 news_agent = Agent(
     name="News Agent",
-    model=Gemini(id="gemini-2.5-flash"),
     instructions=[
         "You are a financial analysis assistant."
         "The user will provide the name of a company or its stock ticker symbol. Please identify the most recent and relevant news articles for financial analysis.",
@@ -29,12 +24,12 @@ news_agent = Agent(
         }""",
         "Respond with a bullet point list of the DataFrame contents.",
     ],
-    db=SqliteDb(db_file="news_agent.db"),
-    tools=[DuckDuckGoTools(fixed_max_results=15), PandasTools()],
-    tool_call_limit=20,
+    tools=[DuckDuckGoTools(fixed_max_results=5)],
+    tool_call_limit=5,
     add_history_to_context=True,
     add_datetime_to_context=True,
     markdown=True,
+    **DEFAULT_AGENT_KWARGS
 )
 
 if __name__ == "__main__":

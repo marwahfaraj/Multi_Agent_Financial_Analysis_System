@@ -1,15 +1,11 @@
 from agno.agent import Agent
 from agno.db.sqlite import SqliteDb
-from agno.models.google import Gemini
 from agno.memory import MemoryManager
 from agno.tools.memory import MemoryTools
-from dotenv import load_dotenv
-
-load_dotenv()
+from agents.config import DEFAULT_AGENT_KWARGS
 
 memory_agent = Agent(
     name="Memory Agent",
-    model=Gemini(id="gemini-2.5-flash"),
     session_id="financial_memory_session",  # Use a fixed session ID to maintain memory across runs
     user_id="financial_user",  # Use a fixed user ID for consistent user identity
     instructions=[
@@ -20,7 +16,7 @@ memory_agent = Agent(
     ],
     tools=[
         MemoryTools(
-            db=SqliteDb(db_file="memory_agent_memories.db"),
+            db=SqliteDb(db_file="memory_agent_memories.db", id="memory-tools-db"),
         )
     ],
     memory_manager=MemoryManager(
@@ -136,6 +132,7 @@ Final Answer: I've retrieved the memories about Microsoft. The latest news inclu
     ),
     add_datetime_to_context=True,
     markdown=True,
+    **DEFAULT_AGENT_KWARGS
 )
 
 if __name__ == "__main__":

@@ -1,12 +1,8 @@
 from agno.agent import Agent
-from agno.models.google import Gemini
-from dotenv import load_dotenv
-
-load_dotenv()
+from agents.config import DEFAULT_AGENT_KWARGS
 
 preprocessing_agent = Agent(
     name="Preprocessing agent",
-    model=Gemini(id="gemini-2.5-flash"),
     instructions=[
         "You are a financial analysis assistant."
         "Your task is to preprocess prompt inputs for downstream analysis.",
@@ -25,7 +21,8 @@ Output: {"ticker": "TSLA", "action_item": "Get the current market status of Tesl
         """Input: "Perform a comprehensive analysis of Amazon.",
 Output: {"ticker": "AMZN", "action_item": "Perform a comprehensive analysis of Amazon", "data_types": ["earnings", "news", "market"]}""",
     ],
-    use_json_mode=True
+    use_json_mode=True,
+    **DEFAULT_AGENT_KWARGS
 )
 
 if __name__ == "__main__":

@@ -9,11 +9,7 @@ from typing import Dict, Any, Optional, Tuple
 
 from agno.agent import Agent
 from agno.db.sqlite import SqliteDb
-from agno.models.google import Gemini
-from dotenv import load_dotenv
-
-
-load_dotenv(".env")
+from agents.config import DEFAULT_AGENT_KWARGS
 
 
 # Evaluator Agent Implementation
@@ -25,7 +21,6 @@ load_dotenv(".env")
 
 evaluator_agent = Agent(
     name="Evaluator Agent",
-    model=Gemini(id="gemini-2.5-flash"),
     instructions=[
         "You are an evaluation agent for financial research outputs.",
         "Evaluate drafts for completeness, accuracy, and clarity.",
@@ -42,9 +37,9 @@ evaluator_agent = Agent(
         "Mark 'ready_for_delivery' true only if overall ≥ 0.85 and no critical gaps remain.",
         "Be objective, concise, and specific. Generic advice is ok."
     ],
-    db=SqliteDb(db_file="evaluator_agent.db"),
     add_datetime_to_context=True,
     markdown=True,
+    **DEFAULT_AGENT_KWARGS
 )
 
 
