@@ -2,12 +2,20 @@
 Complete Workflow Implementation
 Includes Prompt Chaining and Evaluator-Optimizer patterns
 """
+
 from agno.workflow import Step, Workflow, StepInput, StepOutput, Parallel
 from json import loads
 from agents.preprocessing_agent import preprocessing_agent
 from agents.investment_research_agent import investment_research_agent
 from agents.memory_agent import memory_agent
 from workflows.routing import multi_agent_routing
+from workflows.evaluator_optimizer import (
+    show_pre_eval_metrics_executor,
+    gate_optimization_executor,
+    eval_opt_loop,
+    finalize_print_executor,
+    _extract_text_from_ctx,
+)
 
 
 def parse_preprocessing_output(step_input: StepInput) -> dict:
@@ -15,13 +23,15 @@ def parse_preprocessing_output(step_input: StepInput) -> dict:
     Parses the JSON output from the preprocessing agent.
 
     Args:
-        step_input: The step input containing preprocessing output
+        output (str): The JSON string output from the preprocessing agent.
 
     Returns:
         dict: Parsed dictionary containing ticker, action_item, and data_types.
     """
     try:
-        output = step_input.get_step_content("Preprocess Input")
+        output = step_input.get_step_content("Preprocess Input") or ""
+        if not output.strip():
+            return {}
         # Clean the output to ensure it's valid JSON
         cleaned_output = "\n".join(
             line for line in output.splitlines() if not line.strip().startswith("```")
@@ -93,6 +103,12 @@ def stored_data_retriever_executor(step_input: StepInput) -> StepOutput:
     return StepOutput(content=step_input.previous_step_content)
 
 
+def select_synthesis_executor(step_input) -> StepOutput:
+    ctx = step_input.previous_step_content or step_input.content
+    chosen = _extract_text_from_ctx(ctx)
+    return StepOutput(content=chosen)
+
+
 workflow = Workflow(
     name="Analysis workflow",
     steps=[
@@ -119,16 +135,22 @@ workflow = Workflow(
                 agent=memory_agent,
             ),
         ),
+        # fetch the text from investment_research_agent out of the Parallel results
+        Step(name="Select Synthesis Output", executor=select_synthesis_executor),
+        # Runs the evaluator, prints a score “matrix”, and annotates the text with a meta marker.
+        Step(
+            name="Pre-Optimization Evaluation (Display)",
+            executor=show_pre_eval_metrics_executor,
+        ),
+        # skip the optimizer if overall score is  > 0.50
+        Step(
+            name="Gate Optimization (≤ 50% only)", executor=gate_optimization_executor
+        ),
+        # iteratively improve the draft until scores/criteria are met
+        eval_opt_loop,
+        # Prints the clean final report in an Agno box.. strips internal annotations
+        Step(
+            name="Finalize & Print Optimized Report", executor=finalize_print_executor
+        ),
     ],
 )
-
-
-if __name__ == "__main__":
-    workflow.print_response(
-        (
-            "Analyze the financial health and market position of Apple "
-            "based on recent earnings reports, market data, and news articles."
-        ),
-        stream=True,
-        stream_intermediate_steps=True,
-    )

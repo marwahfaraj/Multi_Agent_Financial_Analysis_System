@@ -1,6 +1,7 @@
 """
 Shared configuration for all agents
 """
+
 import os
 from agno.models.google import Gemini
 from dotenv import load_dotenv

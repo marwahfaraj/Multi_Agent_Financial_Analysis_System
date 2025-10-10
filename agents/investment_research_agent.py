@@ -1,5 +1,4 @@
 from agno.agent import Agent
-from agno.db.sqlite import SqliteDb
 from agents.config import DEFAULT_AGENT_KWARGS
 
 investment_research_agent = Agent(

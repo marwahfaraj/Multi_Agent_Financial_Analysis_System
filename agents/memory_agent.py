@@ -1,36 +1,18 @@
 from agno.agent import Agent
 from agno.db.sqlite import SqliteDb
-from agno.memory import MemoryManager
 from agno.tools.memory import MemoryTools
 from agents.config import DEFAULT_AGENT_KWARGS
 
-memory_agent = Agent(
-    name="Memory Agent",
-    session_id="financial_memory_session",  # Use a fixed session ID to maintain memory across runs
-    user_id="financial_user",  # Use a fixed user ID for consistent user identity
-    instructions=[
-        "You are a memory agent that stores and retrieves information for financial analysis.",
-        "User may provide new information related to financial analysis. Store this information in a structured format.",
-        "Always acknowledge if any information is stored.",
-        "User may request information about a specific company or stock ticker symbol. Upon such requests, retrieve and summarize all relevant stored information related to that company or stock ticker symbol.",
-    ],
-    tools=[
-        MemoryTools(
-            db=SqliteDb(db_file="memory_agent_memories.db", id="memory-tools-db"),
-        )
-    ],
-    memory_manager=MemoryManager(
-        memory_capture_instructions=[
-            "Capture any memory that can be used for financial analysis. Examples include:",
-            "  - news articles",
-            "  - stock performance data",
-            "  - market trends",
-            "  - analyst opinions",
-            "Tag or categorize the information with relevant keywords for easy retrieval later.",
-            "If multiple pieces of information are provided, store them as separate memories.",
-            "Do not give your opinion or analysis. Just store or retrieve the information as requested.",
-        ],
-        system_message="""You have access to Think, Add Memory, Update Memory, Delete Memory, and Analyze tools that will help you financial analysis data called memories and analyze their operations.
+memory_instructions = """Capture any memory that can be used for financial analysis. Examples include:
+- news articles
+- stock performance data
+- market trends
+- analyst opinions
+Tag or categorize the information with relevant keywords for easy retrieval later.
+If multiple pieces of information are provided, store them as separate memories.
+Do not give your opinion or analysis. Just store or retrieve the information as requested.,
+
+You have access to Think, Add Memory, Update Memory, Delete Memory, and Analyze tools that will help you financial analysis data called memories and analyze their operations.
 Use these tools as frequently as needed to successfully complete memory management tasks.
 
 ## How to use the Think, Memory Operations, and Analyze tools:             
@@ -128,8 +110,24 @@ Get Memories:
 Analyze: Successfully retrieved the memories about Microsoft. The memories are relevant to the user's request criteria.
 
 Final Answer: I've retrieved the memories about Microsoft. The latest news includes information about its stock performance, market trends, and other relevant financial data.
-""",
-    ),
+"""
+
+memory_agent = Agent(
+    name="Memory Agent",
+    session_id="financial_memory_session",  # Use a fixed session ID to maintain memory across runs
+    user_id="financial_user",  # Use a fixed user ID for consistent user identity
+    instructions=[
+        "You are a memory agent that stores and retrieves information for financial analysis.",
+        "User may provide new information related to financial analysis. Store this information in a structured format.",
+        "Always acknowledge if any information is stored.",
+        "User may request information about a specific company or stock ticker symbol. Upon such requests, retrieve and summarize all relevant stored information related to that company or stock ticker symbol.",
+    ],
+    tools=[
+        MemoryTools(
+            db=SqliteDb(db_file="memory_agent_memories.db"),
+            instructions=memory_instructions,
+        )
+    ],
     add_datetime_to_context=True,
     markdown=True,
     **DEFAULT_AGENT_KWARGS

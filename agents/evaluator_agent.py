@@ -4,11 +4,7 @@
 
 from __future__ import annotations
 
-import json
-from typing import Dict, Any, Optional, Tuple
-
 from agno.agent import Agent
-from agno.db.sqlite import SqliteDb
 from agents.config import DEFAULT_AGENT_KWARGS
 
 
@@ -18,6 +14,8 @@ from agents.config import DEFAULT_AGENT_KWARGS
 # 2. Provides constructive feedback for improvement
 # 3. Works with Investment Research Agent for iterative refinement
 # 4. Implements the Evaluator-Optimizer workflow pattern
+
+EVAL_THRESH = 4.0
 
 evaluator_agent = Agent(
     name="Evaluator Agent",
@@ -33,13 +31,13 @@ evaluator_agent = Agent(
         '  "actions": {"priority_fixes": [str], "checks": [str], "followups": [str]},'
         '  "ready_for_delivery": bool'
         "}",
-        "Scores must be 0.0–5.0. The 'overall' is the mean of the four dimensions.",
+        "Scores must be 0.0-5.0. The 'overall' is the mean of the four dimensions.",
         f"Mark 'ready_for_delivery' true only if overall ≥ {EVAL_THRESH}.",
-        "Be objective, concise, and specific. Keep JSON compact."
+        "Be objective, concise, and specific. Keep JSON compact.",
     ],
     add_datetime_to_context=True,
     markdown=True,
-    **DEFAULT_AGENT_KWARGS
+    **DEFAULT_AGENT_KWARGS,
 )
 
 if __name__ == "__main__":

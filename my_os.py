@@ -1,6 +1,7 @@
 """
 Multi-Agent Financial Analysis System - AgentOS
 """
+
 import os
 from agno.agent import Agent
 from agno.models.google import Gemini
@@ -26,17 +27,15 @@ agent_os = AgentOS(
     name="Mulit-Agent Financial system",  # Matching the name you registered
     description="Multi-Agent Financial Analysis System for comprehensive stock and market analysis",
     agents=[
-        preprocessing_agent,      # Preprocesses user input to extract ticker and intent
-        market_data_agent,        # Fetches market data and stock prices
-        news_agent,               # Retrieves and analyzes news articles
-        earnings_agent,           # Analyzes earnings reports and financial filings
-        memory_agent,             # Stores and retrieves financial information
-        investment_research_agent,# Synthesizes comprehensive investment research
-        evaluator_agent         # Evaluates and improves analysis quality
+        preprocessing_agent,  # Preprocesses user input to extract ticker and intent
+        market_data_agent,  # Fetches market data and stock prices
+        news_agent,  # Retrieves and analyzes news articles
+        earnings_agent,  # Analyzes earnings reports and financial filings
+        memory_agent,  # Stores and retrieves financial information
+        investment_research_agent,  # Synthesizes comprehensive investment research
+        evaluator_agent,  # Evaluates and improves analysis quality
     ],
-    workflows=[
-        workflow
-    ]
+    workflows=[workflow],
 )
 
 app = agent_os.get_app()
@@ -44,4 +43,3 @@ app = agent_os.get_app()
 if __name__ == "__main__":
     # Default port is 7777; change with port=...
     agent_os.serve(app="my_os:app", reload=True)
-
