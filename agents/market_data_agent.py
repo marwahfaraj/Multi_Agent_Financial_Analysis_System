@@ -2,20 +2,16 @@
 # This agent is responsible for fetching market data using APIs
 # Integrates with yfinance for stock quotes and OHLCV data
 import json
-import pandas as pd
 import yfinance as yf
 
-from dotenv import load_dotenv
-
 from agno.agent import Agent
-from agno.db.sqlite import SqliteDb
 from agno.tools import tool
 from agents.config import DEFAULT_AGENT_KWARGS
 
-load_dotenv(".env")
 
-
-@tool(name="fetch_quote", description="Get latest stock price and metadata for a symbol.")
+@tool(
+    name="fetch_quote", description="Get latest stock price and metadata for a symbol."
+)
 def fetch_quote(symbol: str) -> str:
     """Fetch the latest quote for a stock symbol."""
     try:
@@ -73,14 +69,14 @@ market_data_agent = Agent(
     tools=TOOLS,
     add_datetime_to_context=True,
     markdown=True,
-    **DEFAULT_AGENT_KWARGS
+    **DEFAULT_AGENT_KWARGS,
 )
 
 
 if __name__ == "__main__":
     queries = [
         "Get the current price for TSLA",
-        "Show OHLCV data for NVDA for the past month with daily interval"
+        "Show OHLCV data for NVDA for the past month with daily interval",
     ]
 
     for q in queries:

@@ -1,9 +1,6 @@
 from agno.agent import Agent
-from agno.db.sqlite import SqliteDb
 from agno.tools.duckduckgo import DuckDuckGoTools
 from agents.config import DEFAULT_AGENT_KWARGS
-
-# Note: Currently uses DuckDuckGo for news search. Could be enhanced with NewsAPI integration.
 
 news_agent = Agent(
     name="News Agent",
@@ -33,7 +30,6 @@ news_agent = Agent(
 )
 
 if __name__ == "__main__":
-    news_agent.print_response("MSFT")
     while True:
         user_input = input("User: ")
         if user_input.lower() in ["exit", "quit"]:

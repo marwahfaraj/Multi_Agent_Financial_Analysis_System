@@ -1,4 +1,4 @@
-from workflows.prompt_chaining import workflow
+from workflows.workflow_implementation import workflow
 
 if __name__ == "__main__":
     while True:
